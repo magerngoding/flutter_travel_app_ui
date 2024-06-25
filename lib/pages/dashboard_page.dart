@@ -38,6 +38,8 @@ class _DashboaradPageState extends State<DashboaradPage> {
     },
   ];
 
+  static get travel => null;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
