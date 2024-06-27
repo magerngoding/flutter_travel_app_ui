@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
+import 'package:travel_app_ui/models/travel.dart';
 
 class HomeFragment extends StatefulWidget {
   const HomeFragment({super.key});
@@ -14,17 +16,19 @@ class HomeFragment extends StatefulWidget {
 class _HomeFragmentState extends State<HomeFragment> {
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: EdgeInsets.symmetric(horizontal: 25),
-      children: [
-        Gap(20),
-        buildHeader(),
-        Gap(36),
-        buildCategory(),
-        Gap(22),
-        // buildContent(),
-        // buildPopularDestination(),
-      ],
+    return SafeArea(
+      child: ListView(
+        padding: EdgeInsets.symmetric(horizontal: 25),
+        children: [
+          buildHeader(),
+          Gap(36),
+          buildCategory(),
+          Gap(22),
+          buildContent(),
+          Gap(36),
+          buildPopularDestination(),
+        ],
+      ),
     );
   }
 
@@ -185,6 +189,237 @@ class _HomeFragmentState extends State<HomeFragment> {
             ).toList(),
           ),
         ),
+      ],
+    );
+  }
+
+  Widget buildContent() {
+    return SizedBox(
+      height: 143,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        physics: BouncingScrollPhysics(),
+        itemCount: listTravel.length,
+        itemBuilder: (context, index) {
+          Travel travel = listTravel[index];
+          return Container(
+            margin: EdgeInsets.only(right: 12),
+            child: Stack(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(13),
+                  child: Image.asset(
+                    travel.image,
+                    width: 222.0,
+                    height: 143,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 12,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            travel.name,
+                            style: TextStyle(
+                              fontSize: 12.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 67.0,
+                          ),
+                          Text(
+                            '\$${travel.price}',
+                            style: TextStyle(
+                              fontSize: 12.0,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Gap(4),
+                      Row(
+                        children: [
+                          const Icon(
+                            Icons.location_on_sharp,
+                            size: 10.0,
+                            color: Colors.white,
+                          ),
+                          Text(
+                            travel.location,
+                            style: TextStyle(
+                              fontSize: 12.0,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 20.0,
+                          ),
+                          Text(
+                            '\\Person',
+                            style: TextStyle(
+                              fontSize: 12.0,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget buildPopularDestination() {
+    return Column(
+      children: [
+        Row(
+          children: [
+            Text(
+              'Popular Destination',
+              style: TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+                color: Color(0XFF2A2A2A),
+              ),
+            ),
+            Spacer(),
+            Text(
+              'View all',
+              style: TextStyle(
+                fontSize: 12.0,
+                fontWeight: FontWeight.w500,
+                color: Color(0XFF1C9FE2),
+              ),
+            ),
+            Gap(4),
+            Image.asset(
+              "assets/ic_arrow_right.png",
+              width: 8.0,
+              height: 8.0,
+            ),
+          ],
+        ),
+        Gap(22),
+        SizedBox(
+          height: 300,
+          child: ListView.builder(
+            scrollDirection: Axis.vertical,
+            itemCount: listTravel.length,
+            itemBuilder: (context, index) {
+              Travel travel = listTravel[index];
+              return Container(
+                margin: const EdgeInsets.only(bottom: 12),
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(12.0),
+                  ),
+                  color: Colors.white,
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Image.asset(
+                      travel.imageDestination,
+                      width: 95.0,
+                      height: 84.0,
+                    ),
+                    const SizedBox(
+                      width: 14.0,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          travel.destinationName,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14.0,
+                            color: Color(0XFF2A2A2A),
+                          ),
+                        ),
+                        Gap(6),
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.location_on_sharp,
+                              size: 10.0,
+                              color: Color(0XFF1C9FE2),
+                            ),
+                            const SizedBox(
+                              width: 3.0,
+                            ),
+                            Text(
+                              travel.destinationLocate,
+                              style: TextStyle(
+                                fontSize: 12.0,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0XFF1C9FE2),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Gap(6),
+                        Text(
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          travel.destinationDesctiption,
+                          style: TextStyle(
+                            fontSize: 9.0,
+                            fontWeight: FontWeight.w400,
+                            color: Color(0XFF8D94A2),
+                          ),
+                        ),
+                        Gap(6),
+                        Row(
+                          children: [
+                            Text(
+                              '\$${travel.price}',
+                              style: TextStyle(
+                                fontSize: 12.0,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0XFF2A2A2A),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 4.0,
+                            ),
+                            Text(
+                              '\\Person',
+                              style: TextStyle(
+                                fontSize: 10.0,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0XFF8D94A2),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              );
+            },
+          ),
+        )
       ],
     );
   }
