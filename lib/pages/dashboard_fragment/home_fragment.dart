@@ -202,84 +202,93 @@ class _HomeFragmentState extends State<HomeFragment> {
         itemCount: listTravel.length,
         itemBuilder: (context, index) {
           Travel travel = listTravel[index];
-          return Container(
-            margin: EdgeInsets.only(right: 12),
-            child: Stack(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(13),
-                  child: Image.asset(
-                    travel.image,
-                    width: 222.0,
-                    height: 143,
-                    fit: BoxFit.cover,
+          return GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                '/detail',
+                arguments: travel,
+              );
+            },
+            child: Container(
+              margin: EdgeInsets.only(right: 12),
+              child: Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(13),
+                    child: Image.asset(
+                      travel.image,
+                      width: 222.0,
+                      height: 143,
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 14,
-                    vertical: 12,
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 12,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              travel.name,
+                              style: TextStyle(
+                                fontSize: 12.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 67.0,
+                            ),
+                            Text(
+                              '\$${travel.price}',
+                              style: TextStyle(
+                                fontSize: 12.0,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Gap(4),
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.location_on_sharp,
+                              size: 10.0,
+                              color: Colors.white,
+                            ),
+                            Text(
+                              travel.location,
+                              style: TextStyle(
+                                fontSize: 12.0,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 20.0,
+                            ),
+                            Text(
+                              '\\Person',
+                              style: TextStyle(
+                                fontSize: 12.0,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            travel.name,
-                            style: TextStyle(
-                              fontSize: 12.0,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 67.0,
-                          ),
-                          Text(
-                            '\$${travel.price}',
-                            style: TextStyle(
-                              fontSize: 12.0,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Gap(4),
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.location_on_sharp,
-                            size: 10.0,
-                            color: Colors.white,
-                          ),
-                          Text(
-                            travel.location,
-                            style: TextStyle(
-                              fontSize: 12.0,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white,
-                            ),
-                          ),
-                          const SizedBox(
-                            width: 20.0,
-                          ),
-                          Text(
-                            '\\Person',
-                            style: TextStyle(
-                              fontSize: 12.0,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
         },
@@ -325,15 +334,9 @@ class _HomeFragmentState extends State<HomeFragment> {
             itemCount: listTravel.length,
             itemBuilder: (context, index) {
               Travel travel = listTravel[index];
-              return Container(
-                margin: const EdgeInsets.only(bottom: 12),
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(12.0),
-                  ),
-                  color: Colors.white,
-                ),
+              return Card(
+                color: Colors.white,
+                margin: EdgeInsets.only(bottom: 12),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -413,7 +416,7 @@ class _HomeFragmentState extends State<HomeFragment> {
                           ],
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               );
