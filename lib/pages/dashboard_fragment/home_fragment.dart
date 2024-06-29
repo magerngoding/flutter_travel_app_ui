@@ -334,90 +334,97 @@ class _HomeFragmentState extends State<HomeFragment> {
             itemCount: listTravel.length,
             itemBuilder: (context, index) {
               Travel travel = listTravel[index];
-              return Card(
-                color: Colors.white,
-                margin: EdgeInsets.only(bottom: 12),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Image.asset(
-                      travel.imageDestination,
-                      width: 95.0,
-                      height: 84.0,
+              return Expanded(
+                child: Container(
+                  margin: EdgeInsets.only(bottom: 12),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(12.0),
                     ),
-                    const SizedBox(
-                      width: 14.0,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          travel.destinationName,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14.0,
-                            color: Color(0XFF2A2A2A),
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Image.asset(
+                        travel.imageDestination,
+                        width: 95.0,
+                        height: 84.0,
+                      ),
+                      const SizedBox(
+                        width: 14.0,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            travel.destinationName,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14.0,
+                              color: Color(0XFF2A2A2A),
+                            ),
                           ),
-                        ),
-                        Gap(6),
-                        Row(
-                          children: [
-                            const Icon(
-                              Icons.location_on_sharp,
-                              size: 10.0,
-                              color: Color(0XFF1C9FE2),
-                            ),
-                            const SizedBox(
-                              width: 3.0,
-                            ),
-                            Text(
-                              travel.destinationLocate,
-                              style: TextStyle(
-                                fontSize: 12.0,
-                                fontWeight: FontWeight.w500,
+                          Gap(6),
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.location_on_sharp,
+                                size: 10.0,
                                 color: Color(0XFF1C9FE2),
                               ),
-                            ),
-                          ],
-                        ),
-                        Gap(6),
-                        Text(
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          travel.destinationDesctiption,
-                          style: TextStyle(
-                            fontSize: 9.0,
-                            fontWeight: FontWeight.w400,
-                            color: Color(0XFF8D94A2),
+                              const SizedBox(
+                                width: 3.0,
+                              ),
+                              Text(
+                                travel.destinationLocate,
+                                style: TextStyle(
+                                  fontSize: 12.0,
+                                  fontWeight: FontWeight.w500,
+                                  color: Color(0XFF1C9FE2),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                        Gap(6),
-                        Row(
-                          children: [
-                            Text(
-                              '\$${travel.price}',
-                              style: TextStyle(
-                                fontSize: 12.0,
-                                fontWeight: FontWeight.bold,
-                                color: Color(0XFF2A2A2A),
+                          Gap(6),
+                          Text(
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            travel.destinationDesctiption,
+                            style: TextStyle(
+                              fontSize: 9.0,
+                              fontWeight: FontWeight.w400,
+                              color: Color(0XFF8D94A2),
+                            ),
+                          ),
+                          Gap(6),
+                          Row(
+                            children: [
+                              Text(
+                                '\$${travel.price}',
+                                style: TextStyle(
+                                  fontSize: 12.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0XFF2A2A2A),
+                                ),
                               ),
-                            ),
-                            const SizedBox(
-                              width: 4.0,
-                            ),
-                            Text(
-                              '\\Person',
-                              style: TextStyle(
-                                fontSize: 10.0,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0XFF8D94A2),
+                              const SizedBox(
+                                width: 4.0,
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
+                              Text(
+                                '\\Person',
+                                style: TextStyle(
+                                  fontSize: 10.0,
+                                  fontWeight: FontWeight.w500,
+                                  color: Color(0XFF8D94A2),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               );
             },

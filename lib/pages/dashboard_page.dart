@@ -45,7 +45,7 @@ class _DashboaradPageState extends State<DashboaradPage> {
     return Scaffold(
       body: menu[indexMenu]['fragment'] as Widget,
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 44),
+        padding: const EdgeInsets.symmetric(horizontal: 0),
         child: Row(
           children: List.generate(menu.length, (index) {
             Map item = menu[index];

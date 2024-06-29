@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first, prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: public_member_api_docs, sort_constructors_first, prefer_const_constructors, prefer_const_literals_to_create_immutables, use_super_parameters
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -6,7 +6,7 @@ import 'package:gap/gap.dart';
 
 import 'package:travel_app_ui/models/travel.dart';
 
-class DetailPage extends StatefulWidget {
+class DetailPage extends StatelessWidget {
   final Travel travel;
 
   const DetailPage({
@@ -14,11 +14,6 @@ class DetailPage extends StatefulWidget {
     required this.travel,
   }) : super(key: key);
 
-  @override
-  State<DetailPage> createState() => _DetailPageState();
-}
-
-class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,9 +25,6 @@ class _DetailPageState extends State<DetailPage> {
               buildHeader(),
               buildIconAppBar(),
               buildInfo(),
-
-              // buildPreview(),
-              // buildButton(),
             ],
           ),
         ],
@@ -74,10 +66,12 @@ class _DetailPageState extends State<DetailPage> {
                 Radius.circular(8.0),
               ),
             ),
-            child: Image.asset(
-              "assets/ic_arrow_left.png",
-              width: 18.0,
-              height: 18.0,
+            child: IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.arrow_back,
+                size: 18.0,
+              ),
             ),
           ),
           Container(
@@ -104,7 +98,7 @@ class _DetailPageState extends State<DetailPage> {
   Widget buildInfo() {
     return Container(
       width: double.infinity,
-      height: 482,
+      height: 500,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(
           Radius.circular(12.0),
@@ -199,14 +193,42 @@ class _DetailPageState extends State<DetailPage> {
             ],
           ),
           Gap(18),
-          Text(
-            '4.8',
-            style: TextStyle(
-              fontSize: 12.0,
-              fontWeight: FontWeight.w500,
-              color: Color(0XFF8D94A2),
+          SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: List.generate(
+                travel.preview.length,
+                (index) {
+                  return Container(
+                    margin: const EdgeInsets.only(right: 12),
+                    child: Image.asset(
+                      travel.preview[index],
+                      width: 90.0,
+                      height: 90.0,
+                    ),
+                  );
+                },
+              ),
             ),
           ),
+          Gap(20),
+          Container(
+            width: double.infinity,
+            height: 48,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0XFF1C9FE2),
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              onPressed: () {},
+              child: const Text("Book Now"),
+            ),
+          ),
+          Gap(20),
         ],
       ),
     );
